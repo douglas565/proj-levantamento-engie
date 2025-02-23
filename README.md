@@ -1,67 +1,33 @@
-#Software de Gestão de Dados de Infraestrutura Urbana#
-Bem-vindo ao repositório do Software de Gestão de Dados de Infraestrutura Urbana! Este projeto foi desenvolvido para automatizar e otimizar o processo de levantamento e registro de dados relacionados a vias públicas, postes e suas características associadas. Com foco em eficiência, segurança e usabilidade, o software substitui métodos manuais, reduzindo erros e economizando tempo.
+# 🚀 Sistema de Preenchimento de Planilhas Automático
 
-Funcionalidades Principais
-Integração com Planilhas Excel:
+Este projeto é uma aplicação desktop desenvolvida em Python para facilitar o preenchimento de planilhas Excel com base em dados de outras planilhas. Ele utiliza a biblioteca `tkinter` para a interface gráfica e `openpyxl` para manipulação de arquivos Excel. Ideal para quem precisa automatizar o preenchimento de dados de forma rápida e eficiente.
 
-Armazena dados em planilhas Excel (dados_preenchidos.xlsx e Cadastro RAAG.xlsx).
+---
 
-Cabeçalhos padronizados incluem campos como ID RAAG, Via, Bairro, Classificação e Coordenadas Geográficas.
+## 🛠️ Funcionalidades
 
-Preenchimento Automático:
+- **Preenchimento Automático**: Preenche automaticamente campos como coordenadas, bairro, distância entre postes, altura, projeção e recuo com base no ID RAAG.
+- **Navegação Intuitiva**: Use as setas do teclado (`←` e `→`) para alternar entre as abas.
+- **Salvamento Automático**: Ao chegar ao último campo da última aba, os dados são salvos automaticamente.
+- **Validação de Campos**: Verifica se os campos obrigatórios foram preenchidos antes de salvar.
+- **Filtro de Vias**: Busca e filtra vias e IDs RAAG na seção lateral.
+- **Edição e Exclusão**: Permite editar e excluir registros existentes diretamente na interface.
 
-Preenche automaticamente campos como coordenadas, bairro, distância entre postes e classificação de vias com base no ID RAAG ou nome da via.
+---
 
-Validação em Tempo Real:
+## 📦 Como Usar
 
-Valida campos obrigatórios antes do salvamento, garantindo a integridade dos dados.
+### Pré-requisitos
+- Python 3.x instalado.
+- Bibliotecas necessárias: `tkinter`, `openpyxl`.
 
-Interface Responsiva:
+### Instalação
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/nome-do-repositorio.git
 
-Janela redimensionável que pode ser posicionada ao lado de outras ferramentas, como o Google Earth.
 
-Permanece sempre à frente de outras janelas, evitando a necessidade de alternar entre aplicativos.
-
-Preservação de Dados:
-
-Mantém valores anteriores em campos como larguras de pistas e classificação, evitando redigitação em casos de padronização de vias.
-
-Operações em Segundo Plano:
-
-Salvamento e edição de dados são realizados em segundo plano, mantendo a interface gráfica responsiva.
-
-Tecnologias Utilizadas
-Linguagem: Python 3.9+
-
-Bibliotecas Principais:
-
-OpenPyXL: Manipulação de planilhas Excel.
-
-Tkinter: Interface gráfica (GUI).
-
-Logging: Registro de operações e erros.
-
-Threading: Execução de operações em segundo plano.
-
-Outras Bibliotecas:
-
-JSON: Armazenamento de configurações.
-
-Cryptography (futuro): Criptografia de dados.
-
-Instalação e Uso
-Pré-requisitos
-Python 3.9 ou superior instalado.
-
-Bibliotecas necessárias: openpyxl.
-
-Como Executar
-Clone este repositório:
-
-bash
-Copy
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
-Navegue até a pasta do projeto:
+Navegue até o diretório do projeto:
 
 bash
 Copy
@@ -71,47 +37,58 @@ Instale as dependências:
 bash
 Copy
 pip install openpyxl
-Execute o software:
+Executando o Projeto
+Execute o script Python:
 
 bash
 Copy
 python main.py
-Estrutura do Projeto
-Copy
+Siga as instruções na interface gráfica:
+
+Preencha os campos obrigatórios.
+
+Use as setas do teclado (← e →) para alternar entre as abas.
+
+Pressione Enter para avançar entre os campos.
+
+Ao chegar ao último campo da última aba, os dados serão salvos automaticamente.
+
+
+##🗂️ Estrutura do Projeto
+
 nome-do-repositorio/
-├── main.py                # Código principal do software
-├── dados_preenchidos.xlsx  # Planilha de armazenamento de dados
-├── Cadastro RAAG.xlsx      # Planilha de referência para coordenadas
-├── config.json             # Arquivo de configurações
-├── app.log                 # Arquivo de logs
+├── main.py                # Código principal da aplicação
+├── dados_preenchidos.xlsx  # Planilha de saída (gerada automaticamente)
+├── Cadastro RAAG.xlsx      # Planilha de coordenadas (deve ser fornecida)
+├── Classificação.xlsx      # Planilha de classificação (deve ser fornecida)
+├── config.json             # Arquivo de configuração (gerado automaticamente)
+├── app.log                 # Arquivo de log (gerado automaticamente)
 ├── README.md               # Este arquivo
-└── requirements.txt        # Lista de dependências
-Contribuição
-Contribuições são bem-vindas! Se você deseja colaborar com o projeto, siga estas etapas:
 
-Faça um fork do repositório.
 
-Crie uma branch para sua feature:
+##📋 Requisitos
+Planilhas de Entrada:
 
-bash
-Copy
-git checkout -b minha-feature
-Commit suas alterações:
+Cadastro RAAG.xlsx: Deve conter os dados de coordenadas, bairro, distância entre postes, altura, projeção e recuo.
 
-bash
-Copy
-git commit -m "Adicionando nova funcionalidade"
-Envie as alterações para o repositório remoto:
+Classificação.xlsx: Deve conter os dados de classificação das vias.
 
-bash
-Copy
-git push origin minha-feature
-Abra um Pull Request.
+Planilha de Saída:
 
-Licença
-Este projeto está licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais detalhes.
+dados_preenchidos.xlsx: Gerada automaticamente pelo programa.
 
-Contato
-Se você tiver dúvidas, sugestões ou quiser entrar em contato, sinta-se à vontade para me enviar um e-mail:
-📧 douglas.charqueiro@example.com
-🔗 LinkedIn: linkedin.com/in/douglas-charqueiro
+##📄 Licença
+Este projeto está licenciado sob a Licença MIT. Consulte o arquivo LICENSE para mais detalhes.
+
+
+##📞 Contato
+Se você tiver alguma dúvida ou sugestão, sinta-se à vontade para entrar em contato:
+
+Nome: Douglas Ramos Charqueiro
+
+E-mail: douglasramos16@outlook.com
+
+GitHub: douglas565
+
+
+
