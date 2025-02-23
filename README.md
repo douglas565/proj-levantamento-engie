@@ -58,15 +58,22 @@ Ao chegar ao último campo da última aba, os dados serão salvos automaticament
 
 ## 🗂️ Estrutura do Projeto
 
-nome-do-repositorio/
-├── main.py                # Código principal da aplicação
-├── dados_preenchidos.xlsx  # Planilha de saída (gerada automaticamente)
-├── Cadastro RAAG.xlsx      # Planilha de coordenadas (deve ser fornecida)
-├── Classificação.xlsx      # Planilha de classificação (deve ser fornecida)
-├── config.json             # Arquivo de configuração (gerado automaticamente)
-├── app.log                 # Arquivo de log (gerado automaticamente)
-├── README.md               # Este arquivo
+├── main.py # Código principal da aplicação
+├── dados_preenchidos.xlsx # Planilha de saída (gerada automaticamente)
+├── Cadastro RAAG.xlsx # Planilha de coordenadas (deve ser fornecida)
+├── Classificação.xlsx # Planilha de classificação (deve ser fornecida)
+├── config.json # Arquivo de configuração (gerado automaticamente)
+├── app.log # Arquivo de log (gerado automaticamente)
+├── README.md # Este arquivo
 
+### Explicação dos Arquivos
+- **`main.py`**: Contém o código principal da aplicação.
+- **`dados_preenchidos.xlsx`**: Planilha gerada automaticamente com os dados preenchidos.
+- **`Cadastro RAAG.xlsx`**: Planilha de entrada com dados de coordenadas, bairro, distância entre postes, altura, projeção e recuo.
+- **`Classificação.xlsx`**: Planilha de entrada com dados de classificação das vias.
+- **`config.json`**: Arquivo de configuração gerado automaticamente para armazenar o nome da última planilha usada.
+- **`app.log`**: Arquivo de log gerado automaticamente para registrar eventos do sistema.
+- **`README.md`**: Este arquivo, que descreve o projeto.
 ---
 
 ## 📋 Requisitos
