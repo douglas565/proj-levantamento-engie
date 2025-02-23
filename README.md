@@ -69,7 +69,7 @@ nome-do-repositorio/
 
 ---
 
-##📋 Requisitos
+## 📋 Requisitos
 Planilhas de Entrada:
 
 Cadastro RAAG.xlsx: Deve conter os dados de coordenadas, bairro, distância entre postes, altura, projeção e recuo.
