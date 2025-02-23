@@ -58,14 +58,6 @@ Ao chegar ao último campo da última aba, os dados serão salvos automaticament
 
 ## 🗂️ Estrutura do Projeto
 
-├── main.py # Código principal da aplicação
-├── dados_preenchidos.xlsx # Planilha de saída (gerada automaticamente)
-├── Cadastro RAAG.xlsx # Planilha de coordenadas (deve ser fornecida)
-├── Classificação.xlsx # Planilha de classificação (deve ser fornecida)
-├── config.json # Arquivo de configuração (gerado automaticamente)
-├── app.log # Arquivo de log (gerado automaticamente)
-├── README.md # Este arquivo
-
 ### Explicação dos Arquivos
 - **`main.py`**: Contém o código principal da aplicação.
 - **`dados_preenchidos.xlsx`**: Planilha gerada automaticamente com os dados preenchidos.
