@@ -53,8 +53,10 @@ Pressione Enter para avançar entre os campos.
 
 Ao chegar ao último campo da última aba, os dados serão salvos automaticamente.
 
+---
 
-##🗂️ Estrutura do Projeto
+
+## 🗂️ Estrutura do Projeto
 
 nome-do-repositorio/
 ├── main.py                # Código principal da aplicação
@@ -65,6 +67,7 @@ nome-do-repositorio/
 ├── app.log                 # Arquivo de log (gerado automaticamente)
 ├── README.md               # Este arquivo
 
+---
 
 ##📋 Requisitos
 Planilhas de Entrada:
@@ -77,11 +80,12 @@ Planilha de Saída:
 
 dados_preenchidos.xlsx: Gerada automaticamente pelo programa.
 
-##📄 Licença
+## 📄 Licença
 Este projeto está licenciado sob a Licença MIT. Consulte o arquivo LICENSE para mais detalhes.
 
+---
 
-##📞 Contato
+## 📞 Contato
 Se você tiver alguma dúvida ou sugestão, sinta-se à vontade para entrar em contato:
 
 Nome: Douglas Ramos Charqueiro
