@@ -1,4 +1,4 @@
-#Software de Gestão de Dados de Infraestrutura Urbana
+#Software de Gestão de Dados de Infraestrutura Urbana#
 Bem-vindo ao repositório do Software de Gestão de Dados de Infraestrutura Urbana! Este projeto foi desenvolvido para automatizar e otimizar o processo de levantamento e registro de dados relacionados a vias públicas, postes e suas características associadas. Com foco em eficiência, segurança e usabilidade, o software substitui métodos manuais, reduzindo erros e economizando tempo.
 
 Funcionalidades Principais
