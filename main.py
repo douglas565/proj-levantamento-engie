@@ -1,10 +1,58 @@
+
+# Create by Douglas Ramos Charqueiro
+# Developed in ESIP
+
+
 import os
+import tkinter as tk
+import openpyxl
+from openpyxl import Workbook, load_workbook
+from tkinter import ttk, messagebox, simpledialog
+import logging
 import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog
 from openpyxl import Workbook, load_workbook
 import logging
 import threading
 import json
+
+def show_credits():
+    about_window = tk.Toplevel()
+    about_window.title("Sobre o Sistema")
+    about_window.geometry("400x300")
+    
+    # Frame principal
+    frame_principal = ttk.Frame(about_window)
+    frame_principal.pack(expand=True, fill='both', padx=20, pady=20)
+    
+    try:
+        # Tenta carregar a logo
+        logo_path = os.path.join(os.path.dirname(__file__), "engie_logo.png")
+        if os.path.exists(logo_path):
+            logo = tk.PhotoImage(file=logo_path)
+            logo_label = ttk.Label(frame_principal, image=logo)
+            logo_label.image = logo
+            logo_label.pack(pady=10)
+    except Exception as e:
+        logging.error(f"Erro ao carregar logo: {e}")
+    
+    # Texto dos créditos
+    credits = ttk.Label(frame_principal, text="""ENGIE SOLUÇÕES
+Sistema de Gestão de Iluminação Pública
+
+Versão 1.0.0
+
+Developed by: ESIP
+Created by: Douglas Ramos Charqueiro
+
+© 2024 Todos os direitos reservados""", justify='center')
+    credits.pack(pady=10)
+    
+    # Botão de fechar
+    ttk.Button(frame_principal, text="Fechar", 
+              command=about_window.destroy).pack(pady=10)
+    
+
 
 # Configuração do logging
 logging.basicConfig(filename="app.log", level=logging.INFO, format="%(asctime)s - %(message)s")
@@ -20,6 +68,7 @@ json_file = "dados.json"
 # Cache para armazenar os dados de coordenadas
 coordenadas_cache = {}
 classificacao_cache = {}
+
 
 # Função para carregar ou criar a planilha
 def carregar_ou_criar_planilha():
@@ -54,7 +103,7 @@ def carregar_ou_criar_planilha():
         sheet.title = "Levantamento"
         # Adiciona os cabeçalhos
         cabecalhos = [
-            "ID RAAG", "ID IPPUC", "Via", "Bairro", "Classificação", "Distribuição", "Coordenadas",
+            "ID RAAG", "ID IPPUC", "Via", "Bairro", "Trecho", "Classificação", "Distribuição", "Latitude", "Longitude",
             "Largura do Passeio Adjacente", "Largura do Gramado Adjacente", "Largura do Estacionamento Adjacente", 
             "Largura da Pista 1", "Largura do Canteiro Central", "Largura da Pista 2", 
             "Largura do Estacionamento Oposto", "Largura do Gramado Oposto", "Largura do Passeio Oposto", "Ciclovia",
@@ -78,6 +127,8 @@ def carregar_coordenadas_na_memoria():
             coordenadas_cache = {
                 str(row[0]): {
                     "coordenadas": f"{row[7]},{row[8]}",
+                    "latitude": row[7],
+                    "longitude": row[8],
                     "bairro": row[5],
                     "distancia_postes": row[45],
                     "altura": row[39],
@@ -99,46 +150,60 @@ def carregar_coordenadas_na_memoria():
 def buscar_coordenadas(id_raag):
     try:
         dados = coordenadas_cache.get(id_raag, {})
-        return dados.get("coordenadas", ""), dados.get("bairro", ""), dados.get("distancia_postes", ""), dados.get("altura", ""), dados.get("projecao", ""), dados.get("recuo", "")
+        coords = dados.get("coordenadas", "").split(",")
+        latitude = coords[0].strip() if len(coords) > 0 else ""
+        longitude = coords[1].strip() if len(coords) > 1 else ""
+        return (latitude, longitude, 
+                dados.get("bairro", ""), 
+                dados.get("distancia_postes", ""),
+                dados.get("altura", ""),
+                dados.get("projecao", ""),
+                dados.get("recuo", ""))
     except Exception as e:
-        logging.error("Erro ao buscar coordenadas e bairro: %s", e)
-        messagebox.showerror("Erro", "Ocorreu um erro ao buscar os dados.")
-        return "", "", "", "", "", ""
+        logging.error("Erro ao buscar coordenadas: %s", e)
+        return "", "", "", "", "", "", ""
+    
 
 # Função para preencher dados automaticamente
 def preencher_dados_automaticamente(event=None):
     id_raag = entries["entry_id_raag"].get().strip()
-    if id_raag:
-        coordenadas, bairro, distancia_postes, altura, projecao, recuo = buscar_coordenadas(id_raag)
+    if not id_raag:
+        return
 
-        if coordenadas:
-            try:
-                latitude, longitude = coordenadas.split(",")
-                if not entries["entry_Coordenadas"].get().strip():  # Apenas preenche se estiver vazio
-                    entries["entry_Coordenadas"].delete(0, tk.END)
-                    entries["entry_Coordenadas"].insert(0, f"{latitude.strip()}, {longitude.strip()}")
-            except ValueError:
-                messagebox.showerror("Erro", "Coordenadas inválidas no banco de dados.")
+    try:
+        # Busca as coordenadas e outros dados
+        latitude, longitude, bairro, distancia_postes, altura, projecao, recuo = buscar_coordenadas(id_raag)
 
-        if bairro and not entries["entry_bairro"].get().strip():  # Apenas preenche se estiver vazio
-            entries["entry_bairro"].delete(0, tk.END)
-            entries["entry_bairro"].insert(0, bairro.strip())
+        # Preenche latitude e longitude com validação
+        if latitude:
+            if not entries["entry_latitude"].get().strip():
+                entries["entry_latitude"].delete(0, tk.END)
+                entries["entry_latitude"].insert(0, latitude.strip())
+        
+        if longitude:
+            if not entries["entry_longitude"].get().strip():
+                entries["entry_longitude"].delete(0, tk.END)
+                entries["entry_longitude"].insert(0, longitude.strip())
 
-        if distancia_postes and not entries["entry_distancia_postes"].get().strip():  # Apenas preenche se estiver vazio
-            entries["entry_distancia_postes"].delete(0, tk.END)
-            entries["entry_distancia_postes"].insert(0, str(distancia_postes))
-        
-        if altura and not entries["entry_altura"].get().strip():  # Apenas preenche se estiver vazio
-            entries["entry_altura"].delete(0, tk.END)
-            entries["entry_altura"].insert(0, str(altura))
-        
-        if projecao and not entries["entry_projecao"].get().strip():  # Apenas preenche se estiver vazio
-            entries["entry_projecao"].delete(0, tk.END)
-            entries["entry_projecao"].insert(0, str(projecao))
-        
-        if recuo and not entries["entry_recuo"].get().strip():  # Apenas preenche se estiver vazio
-            entries["entry_recuo"].delete(0, tk.END)
-            entries["entry_recuo"].insert(0, str(recuo))
+        # Preenche os demais campos apenas se estiverem vazios
+        campos_para_preencher = [
+            ("entry_bairro", bairro),
+            ("entry_distancia_postes", distancia_postes),
+            ("entry_altura", altura),
+            ("entry_projecao", projecao),
+            ("entry_recuo", recuo)
+        ]
+
+        for campo, valor in campos_para_preencher:
+            if valor and not entries[campo].get().strip():
+                entries[campo].delete(0, tk.END)
+                entries[campo].insert(0, str(valor).strip())
+
+    except ValueError as e:
+        messagebox.showerror("Erro", f"Formato de coordenadas inválido: {e}")
+    except Exception as e:
+        logging.error(f"Erro ao preencher dados automaticamente: {e}")
+        messagebox.showerror("Erro", "Ocorreu um erro ao preencher os dados automaticamente.")
 
 # Função para carregar classificação na memória
 def carregar_classificacao_na_memoria():
@@ -148,11 +213,11 @@ def carregar_classificacao_na_memoria():
             workbook = load_workbook("Classificação.xlsx", read_only=True)
             sheet = workbook.active
             classificacao_cache = {
-                str(row[0]).strip().upper(): (row[1], row[2])  # Normaliza o nome da via
+                str(row[0]).strip().upper(): (row[1], row[2], row[4] if len(row) > 4 else "")  # Via: (Classe, Passeio, Trecho)
                 for row in sheet.iter_rows(min_row=2, values_only=True)
-                if row[0] and row[1] and row[2]
+                if row[0] and row[1] and row[2]  # Garante que Via, Classe e Passeio existam
             }
-            logging.info("Classificação carregada na memória: %d registros.", len(classificacao_cache))
+            logging.info("Classificação e Trechos carregados na memória: %d registros.", len(classificacao_cache))
         else:
             classificacao_cache = {}
             logging.warning("Arquivo de classificação não encontrado.")
@@ -163,25 +228,29 @@ def carregar_classificacao_na_memoria():
 # Função para buscar classificação
 def buscar_classificacao(via):
     try:
-        # Normaliza o nome da via (converte para maiúsculas)
         via_normalizada = via.strip().upper()
-        return classificacao_cache.get(via_normalizada, ("", ""))  # Retorna tupla com Classe Via e Passeio
+        return classificacao_cache.get(via_normalizada, ("", "", ""))  # Retorna (Classe, Passeio, Trecho)
     except Exception as e:
         logging.error("Erro ao buscar classificação: %s", e)
-        messagebox.showerror("Erro", "Ocorreu um erro ao buscar a classificação.")
-        return "", ""
-
-# Função para preencher classificação
+        return "", "", ""
+    
 def preencher_classificacao(event):
     via = entries["entry_via"].get().strip()
     if via:
-        # Normaliza o nome da via (converte para maiúsculas)
         via_normalizada = via.upper()
-        classe_via, passeio = buscar_classificacao(via)
-        if classe_via and passeio and not entries["entry_classificacao"].get().strip():  
+        classe_via, passeio, trecho = buscar_classificacao(via)
+        
+        # Preenche Classificação (se vazio)
+        if classe_via and passeio and not entries["entry_classificacao"].get().strip():
             classificacao_completa = f"{classe_via}-{passeio}"
             entries["entry_classificacao"].delete(0, tk.END)
             entries["entry_classificacao"].insert(0, classificacao_completa)
+        
+        # Preenche Trecho (se vazio)
+        if trecho and not entries["entry_trecho"].get().strip():
+            entries["entry_trecho"].delete(0, tk.END)
+            entries["entry_trecho"].insert(0, trecho)
+
 
 # Função para salvar dados
 def salvar_dados():
@@ -229,7 +298,7 @@ def salvar_em_segundo_plano():
             "entry_largura_passeio_adj", "entry_largura_gramado_adj", "entry_largura_estac_adj",
             "entry_largura_pista1", "entry_largura_canteiro_central", "entry_largura_pista2",
             "entry_largura_estac_opo", "entry_largura_gramado_opo", "entry_largura_passeio_opo",
-            "entry_ciclovia", "entry_via", "entry_bairro", "entry_classificacao", "combobox_distribuicao"
+            "entry_ciclovia", "entry_via", "entry_bairro", "entry_trecho" "entry_classificacao", "combobox_distribuicao",
         }
 
         if linha_existente:
@@ -581,7 +650,7 @@ def criar_campos(aba, fields):
             elif field_name == "combobox_led":
                 values.extend(["SIM", "NÃO"])
             elif field_name == "combobox_observacoes":
-                values.extend(["Retiar braço com luminária", "Instalar braço com luminária", "Rotacionar braço para a via", "Braço muito próximo do Transformador", 
+                values.extend(["Retirar braço com luminária", "Instalar braço com luminária", "Instalar braço, luminária e suporte p/ poste duplo T", "Instalar braço, luminária e suporte p/ poste circular",  "Rotacionar braço para a via", "Braço muito próximo do Transformador", 
                 "Braço com luminária virado para propriedade privada", "iluminação exclusiva para passeio", "Poste com duas luminárias, com uma virada para calçada",
                  "Medidas imprecisas, validar", "Não é possivel levantar as informações", "Ajustar inclinação do braço", "Instalar POSTE, braço e luminária"])
 
@@ -605,9 +674,11 @@ criar_campos(aba1, [
     ("ID IPPUC", "entry_id_ippuc"),
     ("Via", "entry_via"),
     ("Bairro", "entry_bairro"),
+    ("Trecho", "entry_trecho"),
     ("Classificação", "entry_classificacao"),
     ("Distribuição", "combobox_distribuicao"),
-    ("Coordenadas", "entry_Coordenadas"),
+    ("Latitude", "entry_latitude"),
+    ("Longitude", "entry_longitude"),
 ])
 
 # Associar evento para preenchimento automático da classificação
@@ -639,6 +710,7 @@ criar_campos(aba3, [
     ("Observações", "combobox_observacoes"),  # Novo campo (Combobox)
     ("Observações Gerais", "entry_observacoes_gerais"),  # Novo campo
 ])
+
 
 
 # Adicione um Label para a mensagem temporária
