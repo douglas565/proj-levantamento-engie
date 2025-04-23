@@ -41,14 +41,17 @@ bash
 git clone https://github.com/seu-usuario/gestao-iluminacao-publica.git
 ```
 
-## 🗂️ Estrutura de Arquivos
-Arquivo/Pasta	Descrição
-main.py	Código-fonte principal
-dados_preenchidos.xlsx	Planilha principal de saída
-Cadastro RAAG.xlsx	Base de dados geográficos
-Classificação.xlsx	Classificação técnica das vias
-coordenadas_excel.csv	Exportação padronizada para integrações
-config.json	Configurações persistentes do usuário
+## 📂 Estrutura do Projeto
+
+Arquivo/Pasta | Descrição
+main.py	Código-fonte principal da aplicação
+dados_preenchidos.xlsx | Planilha de saída com dados processados
+Cadastro RAAG.xlsx | Base de dados geográficos de referência
+Classificação.xlsx | Classificação técnica das vias públicas
+coordenadas_excel.csv | Arquivo de exportação padronizado
+config.json | Configurações persistentes do usuário
+app.log | Registro de atividades e erros do sistema
+
 
 
 ## ⚙️ Configuração Avançada
