@@ -50,7 +50,9 @@ Navegue entre abas com ← → do teclado
 
 Use Enter para avançar entre campos
 
-Exporte dados para CSV com 1 clique
+Exporte dados para CSV com 1 clique 
+
+```
 
 ## 🗂️ Estrutura de Arquivos
 Arquivo/Pasta	Descrição
