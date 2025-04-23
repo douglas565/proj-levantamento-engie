@@ -8,25 +8,40 @@ Este projeto é uma aplicação desktop desenvolvida em Python para facilitar o 
 
 ---
 
-## 🛠️ Funcionalidades Principais
+## 🌟 Funcionalidades
 
-### ✨ Recursos Essenciais
-- **Preenchimento Automático** de coordenadas, bairro, distâncias e outros campos via ID RAAG/IPPUC
-- **Validação Inteligente** de campos obrigatórios e formatos
-- **Interface Intuitiva** com 3 abas organizadas por categorias
-- **Navegação por Teclado** (← → para trocar abas, Enter para avançar campos)
+### 🛠️ Núcleo do Sistema
 
-### 📤 Novos Recursos de Exportação
-- **Exportação para CSV** com colunas específicas:
-  - ID RAAG | ID IPPUC | LATITUDE | LONGITUDE
-  - Delimitador `;` para compatibilidade com Excel (PT-BR)
-  - Cabeçalho formatado para fácil identificação
+- **Preenchimento Automático Inteligente**
+  - Coordenadas geográficas (Latitude/Longitude)
+  - Classificação técnica de vias
+  - Dados de bairros e distritos
+  - Parâmetros técnicos (altura, projeção, recuo)
 
-### 🔄 Gestão de Dados
-- Busca e filtro de vias/IDs RAAG na sidebar
-- Edição e exclusão de registros existentes
-- Logs detalhados de operações (`app.log`)
-- Criação automática de nova planilha na primeira execução
+### 📊 Gestão de Dados
+
+- **CRUD Completo**
+  - Criação, leitura, atualização e exclusão de registros
+  - Validação de dados em tempo real
+  - Histórico de operações (app.log)
+
+### 🔄 Integração
+
+- **Importação/Exportação**
+  - Compatível com planilhas Excel (.xlsx)
+  - Exportação em CSV padronizado para integração com GIS
+  - Sistema de cache para melhor desempenho
+
+### 🖥️ Interface Avançada
+
+- **Três Abas Organizadas**
+  - Dados Gerais
+  - Larguras e Ciclovia
+  - Postes e Interferências
+- **Navegação por Teclado**
+  - `← →` para trocar abas
+  - `Enter` para avançar campos
+  - `Delete` para remover registros
 
 ---
 
@@ -36,8 +51,9 @@ Este projeto é uma aplicação desktop desenvolvida em Python para facilitar o 
 ```bash
 Python 3.8+
 pip install openpyxl
+```
 Instalação e Execução
-bash
+```bash
 git clone https://github.com/seu-usuario/gestao-iluminacao-publica.git
 ```
 
@@ -54,9 +70,11 @@ git clone https://github.com/seu-usuario/gestao-iluminacao-publica.git
 | `app.log`               | Registro de atividades e erros do sistema  |
 
 
-## ⚙️ Configuração Avançada
-Formatos de Exportação CSV
-python
+## ⚙️ Requisitos para prenchimento automatico
+ **Planilhas**   
+  - Cadastro RAAG
+  - Classificação
+  - id_ippuc_coordenadas
 
 
 ## 📜 Licença
@@ -65,5 +83,7 @@ Este projeto está licenciado sob a Licença MIT.
 
 ## ✉️ Contato
 Douglas Ramos Charqueiro
+
 Email: douglasramos16@outlook.com
+
 GitHub: douglas565
