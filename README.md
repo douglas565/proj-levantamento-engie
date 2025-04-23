@@ -4,7 +4,7 @@
 ![Openpyxl](https://img.shields.io/badge/Openpyxl-3.0.9-green)
 ![Licença](https://img.shields.io/badge/Licença-MIT-orange)
 
-Aplicação desktop para automatizar o preenchimento e gestão de dados de iluminação pública, desenvolvida para a ENGIE Soluções.
+Este projeto é uma aplicação desktop desenvolvida em Python para facilitar o preenchimento de planilhas Excel com base em dados de outras planilhas. Ele utiliza a biblioteca `tkinter` para a interface gráfica e `openpyxl` para manipulação de arquivos Excel. Ideal para quem precisa automatizar o preenchimento de dados de forma rápida e eficiente.
 
 ---
 
@@ -39,19 +39,6 @@ pip install openpyxl
 Instalação e Execução
 bash
 git clone https://github.com/seu-usuario/gestao-iluminacao-publica.git
-cd gestao-iluminacao-publica
-python main.py
-Fluxo de Trabalho
-Preencha os campos obrigatórios (IDs RAAG/IPPUC)
-
-Dados complementares são autocompletados
-
-Navegue entre abas com ← → do teclado
-
-Use Enter para avançar entre campos
-
-Exporte dados para CSV com 1 clique 
-
 ```
 
 ## 🗂️ Estrutura de Arquivos
@@ -67,13 +54,6 @@ config.json	Configurações persistentes do usuário
 ## ⚙️ Configuração Avançada
 Formatos de Exportação CSV
 python
-# Exemplo de saída no CSV
-ID_RAAG;ID_IPPUC;LATITUDE;LONGITUDE
-66455;3456;-25.5924702193806;-49.3349638091506
-Dependências Especiais
-Biblioteca	Versão	Função
-Openpyxl	3.0.9	Manipulação avançada de Excel
-Tkinter	0.1.0	Interface gráfica (GUI)
 
 
 ## 📜 Licença
