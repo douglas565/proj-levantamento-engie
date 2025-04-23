@@ -1,97 +1,84 @@
-# 🚀 Sistema de Preenchimento de Planilhas Automático
+# 🚀 Sistema de Gestão de Iluminação Pública
 
-Este projeto é uma aplicação desktop desenvolvida em Python para facilitar o preenchimento de planilhas Excel com base em dados de outras planilhas. Ele utiliza a biblioteca `tkinter` para a interface gráfica e `openpyxl` para manipulação de arquivos Excel. Ideal para quem precisa automatizar o preenchimento de dados de forma rápida e eficiente.
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![Openpyxl](https://img.shields.io/badge/Openpyxl-3.0.9-green)
+![Licença](https://img.shields.io/badge/Licença-MIT-orange)
 
----
-
-## 🛠️ Funcionalidades
-
-- **Preenchimento Automático**: Preenche automaticamente campos como coordenadas, bairro, distância entre postes, altura, projeção e recuo com base no ID RAAG.
-- **Navegação Intuitiva**: Use as setas do teclado (`←` e `→`) para alternar entre as abas.
-- **Salvamento Automático**: Ao chegar ao último campo da última aba, os dados são salvos automaticamente.
-- **Validação de Campos**: Verifica se os campos obrigatórios foram preenchidos antes de salvar.
-- **Filtro de Vias**: Busca e filtra vias e IDs RAAG na seção lateral.
-- **Edição e Exclusão**: Permite editar e excluir registros existentes diretamente na interface.
+Aplicação desktop para automatizar o preenchimento e gestão de dados de iluminação pública, desenvolvida para a ENGIE Soluções.
 
 ---
 
-## 📦 Como Usar
+## 🛠️ Funcionalidades Principais
+
+### ✨ Recursos Essenciais
+- **Preenchimento Automático** de coordenadas, bairro, distâncias e outros campos via ID RAAG/IPPUC
+- **Validação Inteligente** de campos obrigatórios e formatos
+- **Interface Intuitiva** com 3 abas organizadas por categorias
+- **Navegação por Teclado** (← → para trocar abas, Enter para avançar campos)
+
+### 📤 Novos Recursos de Exportação
+- **Exportação para CSV** com colunas específicas:
+  - ID RAAG | ID IPPUC | LATITUDE | LONGITUDE
+  - Delimitador `;` para compatibilidade com Excel (PT-BR)
+  - Cabeçalho formatado para fácil identificação
+
+### 🔄 Gestão de Dados
+- Busca e filtro de vias/IDs RAAG na sidebar
+- Edição e exclusão de registros existentes
+- Logs detalhados de operações (`app.log`)
+- Criação automática de nova planilha na primeira execução
+
+---
+
+## 🖥️ Como Utilizar
 
 ### Pré-requisitos
-- Python 3.x instalado.
-- Bibliotecas necessárias: `tkinter`, `openpyxl`.
-
-### Instalação
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/seu-usuario/nome-do-repositorio.git
-
-
-Navegue até o diretório do projeto:
-
-bash
-Copy
-cd nome-do-repositorio
-Instale as dependências:
-
-bash
-Copy
+```bash
+Python 3.8+
 pip install openpyxl
-Executando o Projeto
-Execute o script Python:
-
+Instalação e Execução
 bash
-Copy
+git clone https://github.com/seu-usuario/gestao-iluminacao-publica.git
+cd gestao-iluminacao-publica
 python main.py
-Siga as instruções na interface gráfica:
+Fluxo de Trabalho
+Preencha os campos obrigatórios (IDs RAAG/IPPUC)
 
-Preencha os campos obrigatórios.
+Dados complementares são autocompletados
 
-Use as setas do teclado (← e →) para alternar entre as abas.
+Navegue entre abas com ← → do teclado
 
-Pressione Enter para avançar entre os campos.
+Use Enter para avançar entre campos
 
-Ao chegar ao último campo da última aba, os dados serão salvos automaticamente.
+Exporte dados para CSV com 1 clique
 
----
+## 🗂️ Estrutura de Arquivos
+Arquivo/Pasta	Descrição
+main.py	Código-fonte principal
+dados_preenchidos.xlsx	Planilha principal de saída
+Cadastro RAAG.xlsx	Base de dados geográficos
+Classificação.xlsx	Classificação técnica das vias
+coordenadas_excel.csv	Exportação padronizada para integrações
+config.json	Configurações persistentes do usuário
 
 
-## 🗂️ Estrutura do Projeto
+## ⚙️ Configuração Avançada
+Formatos de Exportação CSV
+python
+# Exemplo de saída no CSV
+ID_RAAG;ID_IPPUC;LATITUDE;LONGITUDE
+66455;3456;-25.5924702193806;-49.3349638091506
+Dependências Especiais
+Biblioteca	Versão	Função
+Openpyxl	3.0.9	Manipulação avançada de Excel
+Tkinter	0.1.0	Interface gráfica (GUI)
 
-### Explicação dos Arquivos
-- **`main.py`**: Contém o código principal da aplicação.
-- **`dados_preenchidos.xlsx`**: Planilha gerada automaticamente com os dados preenchidos.
-- **`Cadastro RAAG.xlsx`**: Planilha de entrada com dados de coordenadas, bairro, distância entre postes, altura, projeção e recuo.
-- **`Classificação.xlsx`**: Planilha de entrada com dados de classificação das vias.
-- **`config.json`**: Arquivo de configuração gerado automaticamente para armazenar o nome da última planilha usada.
-- **`app.log`**: Arquivo de log gerado automaticamente para registrar eventos do sistema.
-- **`README.md`**: Este arquivo, que descreve o projeto.
----
 
-## 📋 Requisitos
-Planilhas de Entrada:
+## 📜 Licença
+Este projeto está licenciado sob a Licença MIT.
 
-Cadastro RAAG.xlsx: Deve conter os dados de coordenadas, bairro, distância entre postes, altura, projeção e recuo.
 
-Classificação.xlsx: Deve conter os dados de classificação das vias.
-
-Planilha de Saída:
-
-dados_preenchidos.xlsx: Gerada automaticamente pelo programa.
-
-## 📄 Licença
-Este projeto está licenciado sob a Licença MIT. Consulte o arquivo LICENSE para mais detalhes.
-
----
-
-## 📞 Contato
-Se você tiver alguma dúvida ou sugestão, sinta-se à vontade para entrar em contato:
-
-Nome: Douglas Ramos Charqueiro
-
-E-mail: douglasramos16@outlook.com
-
+## ✉️ Contato
+Douglas Ramos Charqueiro
+Email: douglasramos16@outlook.com
 GitHub: douglas565
-
-
-
